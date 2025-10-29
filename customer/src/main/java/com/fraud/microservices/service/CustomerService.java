@@ -6,6 +6,7 @@ import com.fraud.microservices.mapper.CustomerMapper;
 import com.fraud.microservices.model.Customer;
 import com.fraud.microservices.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -15,7 +16,11 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
-    private final WebClient webClient;
+
+
+    @Autowired
+    private WebClient.Builder webClientBuilder;
+
 
     public CustomerRequest addCustomer(CustomerRequest customerRequest){
 
@@ -30,11 +35,14 @@ public class CustomerService {
 
 
         // check if fraudster.
-        FraudCheckResponse fraudster = webClient.get()
-                .uri("http://localhost:8078/api/v1/fraud-check/{customerId}", customer.getId())
-                .retrieve()
-                .bodyToMono(FraudCheckResponse.class)
-                .block();
+
+        FraudCheckResponse response = webClientBuilder.build()
+                .get()
+                    .uri("http://fraud/api/v1/fraud-check/{customerId}", customer.getId())
+                        .retrieve()
+                            .bodyToMono(FraudCheckResponse.class)
+                                .block();
+
 
         //todo: send notification
         return customerMapper.toDto(savedCustomer);
