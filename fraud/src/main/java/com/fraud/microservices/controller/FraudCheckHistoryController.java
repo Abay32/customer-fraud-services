@@ -17,6 +17,8 @@ public class FraudCheckHistoryController {
         
         boolean fraudster = fraudService.isFraudulentCustomer(customerId);
 
+        System.out.println("FASDFASDFASDFASDF ..........."+ fraudster);
+
         return FraudCheckResponse.builder()
                 .isFraudster(fraudster)
                 .comment(  !fraudster ? "This is not fraudulent" : "This is potentially fraudster customer!")

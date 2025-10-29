@@ -14,7 +14,7 @@ public class FraudCheckHistoryService {
     private final FraudCheckHistoryRepository fraudRepository;
 
     public boolean isFraudulentCustomer(Integer customerId){
-
+        System.out.println("FASDFASDFASDFASDF ..........."+ customerId);
         fraudRepository.save(
                 FraudCheckHistory.builder()
                         .customerId(customerId)

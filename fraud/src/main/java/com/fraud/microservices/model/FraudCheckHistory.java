@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "fraud")
+@Table(name = "_fraud")
 public class FraudCheckHistory {
     @Id
     @SequenceGenerator(

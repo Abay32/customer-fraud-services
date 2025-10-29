@@ -23,8 +23,8 @@ target/
 .sts4-cache
 
 ### NetBeans ###
-/customer/src/main/java/resources/
-/fraud/src/main/java/resources/
+customer/src/main/resources/
+fraud/src/main/resources/
 
 /nbproject/private/
 /nbbuild/
